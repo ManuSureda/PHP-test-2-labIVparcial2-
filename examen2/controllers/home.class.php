@@ -10,8 +10,21 @@ class Home implements crud {
 
     public function index($user){
         $vehiculoController = new vehiculoC();
-        $vehiculoList = $vehiculoController->read($user);
         $userLoged = $user;
+        $array = $vehiculoController->read($user);
+
+        if($array){
+            if(!is_array($array)){
+                $vehiculoList[] = $array;
+            }else{
+                $vehiculoList = $array;
+            }
+        }else{
+            $vehiculoList = array();
+        }
+        
+
+        var_dump($vehiculoList);
         include(VIEWS."/misVehiculos.php");
     }
  
